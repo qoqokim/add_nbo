@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h> // for uint32_t
 #include <netinet/in.h> // for ntohl
+#include <stdlib.h>  // for exit()
 
 void usage() {
     printf("example : ./add_nbo file1.bim file2.bin \n");
@@ -15,6 +16,7 @@ uint32_t read_file(char *argv) {
     a = fopen(argv,"rb");
     if ( a == NULL ) {
         printf("file open error! ");
+	exit(1);
     }
 
     by_len = fread(&by_data,4,1,a);
@@ -25,7 +27,7 @@ uint32_t read_file(char *argv) {
     }
     else  {
         printf("please 4byte file!");
-        return -1;
+        exit(1);
     }
 }
 
